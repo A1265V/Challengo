@@ -71,6 +71,18 @@ theme_override_fonts/font = ExtResource("3_8gbba")
 theme_override_font_sizes/font_size = 18
 text = "0"
 
+[node name="Best" type="Label" parent="Main/Topbar/Streak" unique_id=1791625803]
+layout_mode = 0
+offset_left = 85.0
+offset_top = 125.0
+offset_right = 281.0
+offset_bottom = 151.0
+theme_override_colors/font_color = Color(0.52906674, 0.5290667, 0.5290667, 1)
+theme_override_fonts/font = ExtResource("3_8gbba")
+theme_override_font_sizes/font_size = 20
+text = "Best Streak: 0 days"
+horizontal_alignment = 1
+
 [node name="Button" type="TouchScreenButton" parent="Main" unique_id=514128492]
 position = Vector2(65.00001, 209.99998)
 scale = Vector2(1.58, 1.58)

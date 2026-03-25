@@ -16,8 +16,8 @@ run/main_scene="uid://bnvdvtm2dlq5j"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 run/max_fps=5
 run/low_processor_mode=true
-boot_splash/bg_color=Color(0, 0, 1, 1)
-boot_splash/image="uid://b05dn4i0qgskw"
+boot_splash/bg_color=Color(0.11764706, 0.30980393, 0.7607843, 1)
+boot_splash/image="uid://nndpsoqomlrx"
 config/icon="uid://bo8uoc4wq55g8"
 boot_splash/minimum_display_time=10
 
