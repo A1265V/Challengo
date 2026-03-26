@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://2geyv1elvqr6"]
+
+[ext_resource type="Texture2D" uid="uid://dl1snkwcdbfcn" path="res://Assets/btn_outline_gold.svg" id="1_n8vhn"]
+[ext_resource type="Script" uid="uid://bg0k0d8ult6m1" path="res://Scripts/habit.gd" id="1_ohta7"]
+[ext_resource type="FontFile" uid="uid://cc2f7wfyifhd7" path="res://Assets/Gelasio-Bold.ttf" id="2_e1784"]
+[ext_resource type="Texture2D" uid="uid://rdmxfrcc8ols" path="res://Assets/pill_streak_inactive.svg" id="3_s4f12"]
+[ext_resource type="Texture2D" uid="uid://mu34sa5qvqm6" path="res://Assets/flamegreyedout.svg" id="4_ohta7"]
+
+[node name="Habit" type="Control" unique_id=235642731]
+layout_mode = 3
+anchor_left = 0.025
+anchor_top = 0.022000002
+anchor_right = 0.96900004
+anchor_bottom = 0.097
+offset_top = -0.08000088
+offset_right = 0.15997314
+offset_bottom = -0.08000183
+script = ExtResource("1_ohta7")
+
+[node name="Habit" type="TouchScreenButton" parent="." unique_id=1560874859]
+scale = Vector2(0.95, 1)
+texture_normal = ExtResource("1_n8vhn")
+
+[node name="Name" type="Label" parent="." unique_id=327414323]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 16.0
+offset_right = 153.0
+offset_bottom = 33.0
+theme_override_colors/font_color = Color(0.52906674, 0.5290667, 0.5290667, 1)
+theme_override_fonts/font = ExtResource("2_e1784")
+theme_override_font_sizes/font_size = 12
+text = "Thu, 25th March, 2026"
+horizontal_alignment = 1
+
+[node name="StreakBG" type="Sprite2D" parent="." unique_id=810023947]
+position = Vector2(289, 23)
+texture = ExtResource("3_s4f12")
+
+[node name="Flame" type="Sprite2D" parent="." unique_id=630835401]
+position = Vector2(272.25, 22.999996)
+scale = Vector2(1.1, 1.1)
+texture = ExtResource("4_ohta7")
+
+[node name="Streak" type="Label" parent="." unique_id=971970397]
+layout_mode = 0
+offset_left = 285.0
+offset_top = 12.0
+offset_right = 298.0
+offset_bottom = 36.0
+theme_override_colors/font_color = Color(0.45840502, 0.45840508, 0.45840502, 1)
+theme_override_fonts/font = ExtResource("2_e1784")
+theme_override_font_sizes/font_size = 18
+text = "0"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="Habit" to="." method="_on_habit_pressed"]
