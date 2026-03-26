@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="Chalengo"
+config/name="Challengo"
 config/description="A Daily Streak app"
 run/main_scene="uid://bnvdvtm2dlq5j"
 config/features=PackedStringArray("4.6", "GL Compatibility")

@@ -14,6 +14,7 @@ extends Control
 @onready var enter_habit_name: CanvasLayer = $EnterHabitName
 @onready var edit: LineEdit = $EnterHabitName/Edit
 @onready var datelbl2: Label = $Add/Topbar/Date
+@onready var settings: CanvasLayer = $Settings
 
 const inactive_fire := preload("res://Assets/flamegreyedout.svg")
 const active_fire := preload("res://Assets/flame.svg")
@@ -173,3 +174,16 @@ func load_data():
 	var error = json.parse(json_string)
 	if error == OK:
 		data = json.data
+
+func _on_back_set_pressed() -> void:
+	add.visible = true
+	settings.visible = false
+
+func _on_settings_pressed() -> void:
+	add.visible = false
+	settings.visible = true
+
+func _on_clear_pressed() -> void:
+	data.habits = []
+	save_data()
+	load_data()
