@@ -1,5 +1,5 @@
 # PolyForm Noncommercial License 1.0.0
-
+Required Notice: Copyright 2026 A1265V (a1265v.dev.o@gmail.com)
 <https://polyformproject.org/licenses/noncommercial/1.0.0>
 
 ## Acceptance
