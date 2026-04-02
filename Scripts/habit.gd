@@ -1,4 +1,4 @@
-#Copyright [Year] [Your Name]
+#Copyright 2026 A1265V
 #Licensed under the PolyForm Noncommercial License 1.0.0
 #See LICENSE file in the project root for full license terms.
 extends Control
@@ -8,6 +8,7 @@ extends Control
 @onready var streak_bg: Sprite2D = $StreakBG
 @onready var flame: Sprite2D = $Flame
 @onready var streak_lbl: Label = $Streak
+@onready var press_timer: Timer = $PressTimer
 
 const inactive_fire := preload("res://Assets/flamegreyedout.svg")
 const active_fire := preload("res://Assets/flame.svg")
@@ -37,4 +38,7 @@ func update():
 		streak_bg.texture = inactive_pill
 		flame.texture = inactive_fire
 		
-	
+
+func _input(event: InputEvent) -> void:
+	if event is InputEvent:
+		pass

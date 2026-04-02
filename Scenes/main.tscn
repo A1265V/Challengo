@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://mu34sa5qvqm6" path="res://Assets/flamegreyedout.svg" id="5_6bp64"]
 [ext_resource type="Texture2D" uid="uid://x8wuo28n3br" path="res://Assets/timer_idle_inner_navy.svg" id="6_344ge"]
 [ext_resource type="Texture2D" uid="uid://dl1snkwcdbfcn" path="res://Assets/btn_outline_gold.svg" id="8_344ge"]
+[ext_resource type="Texture2D" uid="uid://d1olveqa36oua" path="res://Assets/settings.svg" id="8_hptm8"]
 [ext_resource type="Script" uid="uid://dpt5paghiouf" path="res://Scripts/edit.gd" id="9_ynf5e"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ynf5e"]
@@ -107,6 +108,18 @@ theme_override_font_sizes/font_size = 20
 text = "Best Streak: 0 days"
 horizontal_alignment = 1
 
+[node name="Total" type="Label" parent="Main/Topbar/Streak" unique_id=788942035]
+layout_mode = 0
+offset_left = 85.0
+offset_top = 526.0
+offset_right = 281.0
+offset_bottom = 552.0
+theme_override_colors/font_color = Color(0.52906674, 0.5290667, 0.5290667, 1)
+theme_override_fonts/font = ExtResource("3_8gbba")
+theme_override_font_sizes/font_size = 20
+text = "Total: 0 days"
+horizontal_alignment = 1
+
 [node name="Name" type="Label" parent="Main/Topbar/Streak" unique_id=351731079]
 layout_mode = 0
 offset_left = 85.0
@@ -189,16 +202,9 @@ offset_right = 332.0
 offset_bottom = 616.0
 
 [node name="Settings" type="TouchScreenButton" parent="Add" unique_id=1414078830]
-position = Vector2(308, 7)
-scale = Vector2(0.07692305, 0.075)
-texture_normal = ExtResource("2_8gbba")
-
-[node name="SettingsLbl" type="Label" parent="Add" unique_id=1543044988]
-offset_left = 312.0
-offset_top = 10.0
-offset_right = 352.0
-offset_bottom = 33.0
-text = "⚙"
+position = Vector2(311, 12.000001)
+scale = Vector2(1.3749995, 1.375)
+texture_normal = ExtResource("8_hptm8")
 
 [node name="EnterHabitName" type="CanvasLayer" parent="." unique_id=795656835]
 visible = false

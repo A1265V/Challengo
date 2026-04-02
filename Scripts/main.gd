@@ -1,4 +1,4 @@
-#Copyright [Year] [Your Name]
+#Copyright 2026 A1265V
 #Licensed under the PolyForm Noncommercial License 1.0.0
 #See LICENSE file in the project root for full license terms.
 extends Control
@@ -18,6 +18,7 @@ extends Control
 @onready var edit: LineEdit = $EnterHabitName/Edit
 @onready var datelbl2: Label = $Add/Topbar/Date
 @onready var settings: CanvasLayer = $Settings
+@onready var total_: Label = $Main/Topbar/Streak/Total
 
 const inactive_fire := preload("res://Assets/flamegreyedout.svg")
 const active_fire := preload("res://Assets/flame.svg")
@@ -37,6 +38,8 @@ var default := {
 	"best": 0,
 	"last_claim_unix": -1,
 	"is_claimed": false,
+	"total": 0,
+	
 }
 
 func _ready() -> void:
@@ -90,8 +93,9 @@ func update_habit(idx :int):
 		flame.texture = inactive_fire
 		streak_bg.texture = inactive_pill
 	habit_name_lbl.text = habit["habit_name"]
-	streak_lbl.text = str(habit["streak"])
-	best.text = "Best Streak: " + str(int(habit["best"]))
+	streak_lbl.text = str(int(habit["streak"]))
+	best.text = "Best Streak: " + str(int(habit["best"])) + " days"
+	total_.text = "Total: " + str(int(habit["total"])) + " days"
 
 func _on_button_pressed() -> void:
 	if opened_habit == -1: return
@@ -104,6 +108,7 @@ func _on_button_pressed() -> void:
 	update_button()
 	clear_habits()
 	get_habits()
+	total()
 
 func fix_best():
 	if data.habits[opened_habit]["streak"] > data.habits[opened_habit]["best"]:
@@ -190,3 +195,6 @@ func _on_clear_pressed() -> void:
 	data.habits = []
 	save_data()
 	load_data()
+
+func total():
+	data.habits[opened_habit]["total"] += 1
