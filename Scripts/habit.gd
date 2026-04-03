@@ -35,6 +35,10 @@ func _ready() -> void:
 	# Wire signals not connected in the scene
 	habit.released.connect(_on_habit_released)
 	press_timer.timeout.connect(_on_press_timer_timeout)
+	
+	# Connect the checkbox signal to handle direct clicks
+	check_box.pressed.connect(_on_check_box_pressed)
+	
 	press_timer.one_shot = true
 	update()
 
@@ -54,11 +58,13 @@ func _on_habit_released() -> void:
 
 func _on_press_timer_timeout() -> void:
 	# Long press confirmed — enter select mode visually and notify parent
-	in_select_mode = true
-	habit.scale.x = 0.82
-	habit.position.x = 40
-	habit_name_lbl.position.x = 60
-	check_box.visible = true
+	if not in_select_mode:
+		in_select_mode = true
+		enter_select_mode()
+		emit_signal("button_selected", self)
+
+func _on_check_box_pressed() -> void:
+	# When the user clicks the checkbox directly, treat it as a selection toggle
 	emit_signal("button_selected", self)
 #endregion
 
@@ -89,5 +95,5 @@ func button_unselect() -> void:
 	habit.position.x = 0
 	habit_name_lbl.position.x = 12
 	check_box.visible = false
-	check_box.button_pressed = false
+	check_box.set_pressed_no_signal(false)
 #endregion

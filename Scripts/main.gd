@@ -144,12 +144,16 @@ func habit_toggle_select(node) -> void:
 	if selected_habits.is_empty():
 		for child in habit_holder.get_children():
 			child.enter_select_mode()
+	
 	if node in selected_habits:
 		selected_habits.erase(node)
-		node.check_box.button_pressed = false
+		# Update UI state without triggering extra signals
+		node.check_box.set_pressed_no_signal(false)
 	else:
 		selected_habits.append(node)
-		node.check_box.button_pressed = true
+		# Update UI state without triggering extra signals
+		node.check_box.set_pressed_no_signal(true)
+	
 	button_selected = selected_habits.size() > 0
 	delete_btn.visible = button_selected
 	settings_btn.visible = not button_selected
@@ -164,6 +168,7 @@ func _on_delete_pressed() -> void:
 	indices.reverse()
 	for idx in indices:
 		data.habits.remove_at(idx)
+	
 	selected_habits.clear()
 	button_selected = false
 	opened_habit = -1
@@ -291,4 +296,6 @@ func _on_clear_pressed() -> void:
 	data.habits = []
 	save_data()
 	load_data()
+	clear_habits()
+	get_habits()
 #endregion
