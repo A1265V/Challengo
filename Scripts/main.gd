@@ -198,3 +198,18 @@ func _on_clear_pressed() -> void:
 
 func total():
 	data.habits[opened_habit]["total"] += 1
+
+func _notification(what: int) -> void:
+	if what != NOTIFICATION_WM_GO_BACK_REQUEST:
+		return
+	
+	if what == NOTIFICATION_WM_GO_BACK_REQUEST:
+		if enter_habit_name.visible == true:
+			add.visible = false
+		elif add.visible == false:
+			add.visible = true
+			settings.visible = false
+			enter_habit_name.visible = false
+			main.visible = false
+		else:
+			get_tree().quit()
