@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://x8wuo28n3br" path="res://Assets/timer_idle_inner_navy.svg" id="6_344ge"]
 [ext_resource type="Texture2D" uid="uid://dl1snkwcdbfcn" path="res://Assets/btn_outline_gold.svg" id="8_344ge"]
 [ext_resource type="Texture2D" uid="uid://d1olveqa36oua" path="res://Assets/settings.svg" id="8_hptm8"]
+[ext_resource type="Texture2D" uid="uid://o75jmcvla77f" path="res://Assets/del.svg" id="9_d1ilt"]
 [ext_resource type="Script" uid="uid://dpt5paghiouf" path="res://Scripts/edit.gd" id="9_ynf5e"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ynf5e"]
@@ -205,6 +206,11 @@ offset_bottom = 616.0
 position = Vector2(311, 12.000001)
 scale = Vector2(1.3749995, 1.375)
 texture_normal = ExtResource("8_hptm8")
+
+[node name="Delete" type="TouchScreenButton" parent="Add" unique_id=2116845602]
+position = Vector2(311, 12.000001)
+scale = Vector2(1.5, 1.5)
+texture_normal = ExtResource("9_d1ilt")
 
 [node name="EnterHabitName" type="CanvasLayer" parent="." unique_id=795656835]
 visible = false

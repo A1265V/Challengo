@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://rdmxfrcc8ols" path="res://Assets/pill_streak_inactive.svg" id="3_s4f12"]
 [ext_resource type="Texture2D" uid="uid://mu34sa5qvqm6" path="res://Assets/flamegreyedout.svg" id="4_ohta7"]
 
+[sub_resource type="Theme" id="Theme_ohta7"]
+
 [node name="Habit" type="Control" unique_id=235642731]
 layout_mode = 3
 anchor_left = 0.025
@@ -54,5 +56,16 @@ text = "0"
 horizontal_alignment = 1
 
 [node name="PressTimer" type="Timer" parent="." unique_id=418792083]
+wait_time = 0.5
+one_shot = true
+
+[node name="CheckBox" type="CheckBox" parent="." unique_id=1122885845]
+visible = false
+layout_mode = 0
+offset_left = 11.0
+offset_top = 12.0
+offset_right = 35.0
+offset_bottom = 36.0
+theme = SubResource("Theme_ohta7")
 
 [connection signal="pressed" from="Habit" to="." method="_on_habit_pressed"]
