@@ -22,11 +22,12 @@ var habit_name: String = ""
 var current_streak: int = 0
 var is_claimed: bool = false
 var index: int = -1
+var in_select_mode: bool = false  # when true, short press toggles selection instead of opening detail
 #endregion
 
 #region Signals
 signal habit_selected()       # emitted on short press — opens habit detail view
-signal button_selected(node)  # emitted on long press — enters multi-select mode
+signal button_selected(node)  # emitted on long press or tap in select mode — toggles selection
 #endregion
 
 
@@ -43,13 +44,17 @@ func _on_habit_pressed() -> void:
 	press_timer.start()
 
 func _on_habit_released() -> void:
-	# If timer is still running it was a short press, stop it and open the habit
 	if press_timer.time_left > 0:
 		press_timer.stop()
-		emit_signal("habit_selected")
+		if in_select_mode:
+			# In select mode tapping toggles this habit's selection
+			emit_signal("button_selected", self)
+		else:
+			emit_signal("habit_selected")
 
 func _on_press_timer_timeout() -> void:
-	# Long press confirmed — shrink and shift button to reveal checkbox, notify parent
+	# Long press confirmed — enter select mode visually and notify parent
+	in_select_mode = true
 	habit.scale.x = 0.82
 	habit.position.x = 40
 	habit_name_lbl.position.x = 60
@@ -69,10 +74,20 @@ func update() -> void:
 		streak_bg.texture = inactive_pill
 		flame.texture = inactive_fire
 
+func enter_select_mode() -> void:
+	# Called on all habits when any one is long pressed — show checkbox on all
+	in_select_mode = true
+	habit.scale.x = 0.82
+	habit.position.x = 40
+	habit_name_lbl.position.x = 60
+	check_box.visible = true
+
 func button_unselect() -> void:
-	# Called by parent to deselect this habit — restore original button size and position
+	# Called by parent to exit selection mode — restore original state
+	in_select_mode = false
 	habit.scale.x = 1.0
 	habit.position.x = 0
 	habit_name_lbl.position.x = 12
 	check_box.visible = false
+	check_box.button_pressed = false
 #endregion

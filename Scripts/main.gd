@@ -55,6 +55,9 @@ var default := {
 func _ready() -> void:
 	delete_btn.visible = false
 	delete_btn.pressed.connect(_on_delete_pressed)
+	# Also wire in code as safety net in case scene connection breaks
+	if not edit.text_submitted.is_connected(_on_edit_text_submitted):
+		edit.text_submitted.connect(_on_edit_text_submitted)
 	load_data()
 	check_all_habits_time()
 	get_habits()
@@ -66,6 +69,18 @@ func _ready() -> void:
 func _on_add_pressed() -> void:
 	enter_habit_name.visible = true
 	edit.edit()
+
+func _on_edit_text_submitted(text: String) -> void:
+	if text.strip_edges() == "":
+		return
+	var def = default.duplicate()
+	def["habit_name"] = text
+	data["habits"].append(def)
+	save_data()
+	enter_habit_name.visible = false
+	edit.clear()
+	clear_habits()
+	get_habits()
 
 func _on_back_pressed() -> void:
 	main.visible = false
@@ -87,9 +102,9 @@ func _notification(what: int) -> void:
 		enter_habit_name.visible = false
 		add.visible = true
 	elif button_selected:
-		# Cancel multi-select mode without deleting
-		for node in selected_habits:
-			node.button_unselect()
+		# Exit selection mode on all habits without deleting
+		for child in habit_holder.get_children():
+			child.button_unselect()
 		selected_habits.clear()
 		button_selected = false
 		delete_btn.visible = false
@@ -125,12 +140,16 @@ func clear_habits() -> void:
 
 #region Multi-select and deletion
 func habit_toggle_select(node) -> void:
-	# Add to selection if not already selected, otherwise deselect it
+	# On first selection, push all habits into selection mode visually
+	if selected_habits.is_empty():
+		for child in habit_holder.get_children():
+			child.enter_select_mode()
 	if node in selected_habits:
 		selected_habits.erase(node)
-		node.button_unselect()
+		node.check_box.button_pressed = false
 	else:
 		selected_habits.append(node)
+		node.check_box.button_pressed = true
 	button_selected = selected_habits.size() > 0
 	delete_btn.visible = button_selected
 	settings_btn.visible = not button_selected
@@ -140,7 +159,6 @@ func _on_delete_pressed() -> void:
 	var indices: Array = []
 	for node in selected_habits:
 		indices.append(node.index)
-		node.queue_free()
 	# Remove highest indices first so earlier indices don't shift during removal
 	indices.sort()
 	indices.reverse()
@@ -148,9 +166,13 @@ func _on_delete_pressed() -> void:
 		data.habits.remove_at(idx)
 	selected_habits.clear()
 	button_selected = false
+	opened_habit = -1
 	delete_btn.visible = false
 	settings_btn.visible = true
 	save_data()
+	# Rebuild list so all remaining nodes get fresh correct indices
+	clear_habits()
+	get_habits()
 #endregion
 
 
